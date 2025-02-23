@@ -16,5 +16,5 @@ for _, tool in next, game.Players.LocalPlayer.Backpack:GetDescendants() do
 tool.Parent = game.Players.LocalPlayer.Character
   end
 end
- task.wait(0.1)
+ repeat wait() until #game.Players.LocalPlayer.Backpack:GetChildren() == 0 or not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
