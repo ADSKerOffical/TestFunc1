@@ -1,0 +1,67 @@
+getgenv().safeerror = newcclosure(function(text)
+ task.spawn(function()
+  error(text, 0)
+ end)
+end)
+
+getgenv().isvararg = newcclosure(function(var)
+   return debug.getinfo(var).is_vararg > 0
+end)
+
+getgenv().randomstring = newcclosure(function(num)
+ local str = {}
+  for i, num do
+    str[i] = string.char(math.random(97, 122))
+  end
+ return table.concat(str)
+end)
+
+getgenv().getenvlist = newcclosure(function()
+local tyuh = {}
+  for i, _ in next, getgenv() do 
+    if i ~= "getgenv" then
+        table.insert(tyuh, i)
+    end
+  end
+   return tyuh
+end)
+
+getgenv().getmousepos = newcclosure(function()
+  local mouse = game.Players.LocalPlayer:GetMouse()
+  return Vector2.new(mouse.X, mouse.Y)
+end)
+
+getgenv().getproperties = newcclosure(function(instance)
+local properties = {}
+    for _, propertyName in ipairs(game:GetService("ReflectionService"):GetPropertyNames(instance.ClassName)) do
+        if instance[propertyName] ~= nil then
+            properties[propertyName] = instance[propertyName]
+        end
+    end
+  return properties
+end)
+
+getgenv().ishiddenproperty = newcclosure(function(var, prop)
+  local yes, err = pcall(function()
+    value = var[prop]
+  end)
+  
+   if yes then
+ return false
+    else
+ local yes2, err = pcall(function()
+   gethiddenproperty(var, prop)
+ end)
+ 
+     if yes2 then
+return true
+      else
+return nil
+     end
+   end
+end)
+
+getgenv().isrenderproperty = newcclosure(function(var, prop)
+  if ishiddenproperty(var, prop) == nil then return nil end
+  return not ishiddenproperty(var, prop)
+end)
