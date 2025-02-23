@@ -1,0 +1,9 @@
+repeat wait() until game.Players.LocalPlayer.Character
+for i = 1, 7 do
+ local kitty = Workspace.Maps.StartMap.Collection:FindFirstChild("Ktty" .. i)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = kitty.Body.CFrame
+task.wait(0.3)
+   fireproximityprompt(kitty.ProximityPrompt, 0)
+ task.wait(0.3)
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.Maps.StartMap.NPCs.Cat1.HitBox.CFrame
+end
