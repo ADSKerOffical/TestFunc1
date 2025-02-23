@@ -1,9 +1,20 @@
+queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/ADSKerOffical/TestFunc1/refs/heads/main/Source"))()')
 repeat wait() until game.Players.LocalPlayer.Character
 for i = 1, 7 do
- local kitty = Workspace.Maps.StartMap.Collection:FindFirstChild("Ktty" .. i)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = kitty.Body.CFrame
-task.wait(0.3)
-   fireproximityprompt(kitty.ProximityPrompt, 0)
- task.wait(0.3)
- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.Maps.StartMap.NPCs.Cat1.HitBox.CFrame
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.Maps.StartMap.Collection:FindFirstChild("Ktty" .. i).Body.CFrame
+  task.wait(0.25)
+    repeat task.wait(0.1)
+ fireproximityprompt(Workspace.Maps.StartMap.Collection:FindFirstChild("Ktty" .. i).ProximityPrompt, 0)
+  until game.Players.LocalPlayer.Character:FindFirstChild("Ktty" .. i)
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("Ktty" .. i)
+ repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("Ktty" .. i)
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.Maps.StartMap.NPCs.Cat1.HitBox.CFrame * CFrame.new(0, -1, 0.5)
 end
+  task.wait()
+for _, tool in next, game.Players.LocalPlayer.Backpack:GetDescendants() do
+  if tool:IsA("Tool") or tool:IsA("HopperBin") then
+tool.Parent = game.Players.LocalPlayer.Character
+  end
+end
+ task.wait(0.1)
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
